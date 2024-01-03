@@ -21,8 +21,9 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number === 0 || number > 0) return true;
+  return false;
 }
 
 /**
@@ -38,8 +39,10 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  if (a > b && a > c) return a;
+  if (b > a && b > c) return b;
+  return c;
 }
 
 /**
@@ -60,8 +63,36 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const maxX = Math.max(queen.x, king.x);
+  const maxY = Math.max(queen.y, king.y);
+  const minX = Math.min(queen.x, king.x);
+  const minY = Math.min(queen.y, king.y);
+  let x = minX;
+  let y = minY;
+  for (let i = Math.min(minX, minY); i < Math.max(maxX, maxY); i += 1) {
+    x += 1;
+    y += 1;
+    if (x === maxX && y === maxY) {
+      return true;
+    }
+  }
+  x = minX;
+  y = minY;
+  for (let i = Math.min(minX, minY); i < Math.max(maxX, maxY); i += 1) {
+    x += 1;
+    if (x === maxX && y === maxY) {
+      return true;
+    }
+  }
+  x = minX;
+  for (let i = Math.min(minX, minY); i < Math.max(maxX, maxY); i += 1) {
+    y += 1;
+    if (x === maxX && y === maxY) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
