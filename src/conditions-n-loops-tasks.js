@@ -357,8 +357,39 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const matrix = new Array(size);
+  for (let i = 0; i < matrix.length; i += 1) {
+    matrix[i] = new Array(size);
+  }
+  let num = 1;
+  let top = 0;
+  let bottom = matrix.length - 1;
+  let left = 0;
+  let right = matrix.length - 1;
+  while (num <= size * size) {
+    for (let i = left; i <= right; i += 1) {
+      matrix[top][i] = num;
+      num += 1;
+    }
+    top += 1;
+    for (let i = top; i <= bottom; i += 1) {
+      matrix[i][right] = num;
+      num += 1;
+    }
+    right -= 1;
+    for (let i = right; i >= left; i -= 1) {
+      matrix[bottom][i] = num;
+      num += 1;
+    }
+    bottom -= 1;
+    for (let i = bottom; i >= top; i -= 1) {
+      matrix[i][left] = num;
+      num += 1;
+    }
+    left += 1;
+  }
+  return matrix;
 }
 
 /**
@@ -376,8 +407,19 @@ function getSpiralMatrix(/* size */) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const size = matrix[0].length;
+  const origMatrix = matrix;
+  const copyMatrix = [];
+  for (let i = 0; i < size; i += 1) {
+    copyMatrix[i] = [...matrix[i]];
+  }
+  for (let i = 0; i < size; i += 1) {
+    for (let j = 0; j < size; j += 1) {
+      origMatrix[j][size - 1 - i] = copyMatrix[i][j];
+    }
+  }
+  return origMatrix;
 }
 
 /**
@@ -425,22 +467,9 @@ function sortByAsc(arr) {
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
 
-function shuffleChar(str, iterations) {
-  let result = str;
-  for (let i = 0; i < iterations; i += 1) {
-    let odd = '';
-    let even = '';
-    for (let j = 1; j < result.length; j += 2) {
-      odd += result[j];
-    }
-    for (let j = 0; j < result.length; j += 2) {
-      even += result[j];
-    }
-    result = even + odd;
-  }
-  return result;
+function shuffleChar(/* str, iterations */) {
+  throw new Error('Not implemented');
 }
-
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
